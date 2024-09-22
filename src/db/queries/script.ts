@@ -11,9 +11,23 @@ async function main() {
     //     },
     // });
     // console.log(category);
-
-    const categories = await prisma.category.findMany();
-    console.log(categories);
+    // const categories = await prisma.category.findMany();
+    // console.log(categories);
+    // const deleteCategory = await prisma.category.delete({
+    //     where: {
+    //         id: 1,
+    //     },
+    // });
+    // console.log(deleteCategory);
+    const updateCategory = await prisma.category.update({
+        where: {
+            name: 'cafe',
+        },
+        data: {
+            name: 'Cafe',
+        },
+    });
+    console.log(updateCategory);
 }
 main()
     .then(async () => {

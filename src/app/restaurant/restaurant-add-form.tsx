@@ -18,14 +18,19 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { getCategories } from '@/actions/categories';
+import { fetchCategoriesData } from '@/db/queries/categories';
+import type { Category } from '@prisma/client';
 
 export default function RestaurantAddForm() {
     const [newRating, setNewRating] = useState(5);
-    const [categories, setCategories] = useState([]);
-
+    const [categories, setCategories] = useState<Category[]>([]);
     useEffect(() => {
-        // setCategories(await getCategories());
-    });
+        const getCategoryData = async () => {
+            const data = await getCategories();
+            setCategories(data);
+        };
+        getCategoryData();
+    }, []);
 
     return (
         <Popover>
@@ -47,18 +52,21 @@ export default function RestaurantAddForm() {
                         </div>
                         <div className="grid grid-cols-3 items-center gap-4">
                             <Label htmlFor="cateory">CATEGORY</Label>
-                            <Select>
+                            <Select defaultValue="korean">
                                 <SelectTrigger className="w-[180px]">
                                     <SelectValue placeholder="Sort by" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {/* {categories?.map((category) => {
+                                    {categories?.map((category) => {
                                         return (
-                                            <SelectItem value={category.name}>
+                                            <SelectItem
+                                                key={category.id}
+                                                value={category.name}
+                                            >
                                                 {category.name}
                                             </SelectItem>
                                         );
-                                    })} */}
+                                    })}
                                 </SelectContent>
                             </Select>
                         </div>

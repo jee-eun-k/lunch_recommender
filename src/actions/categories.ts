@@ -3,5 +3,5 @@
 import { fetchCategoriesData } from '@/db/queries/categories';
 
 export async function getCategories() {
-    return fetchCategoriesData();
+    return await fetchCategoriesData();
 }
