@@ -8,6 +8,9 @@ import {
 import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import SearchInput from './searchInput';
+import { getCategories } from '@/actions/categories';
+import { useMemo } from 'react';
+
 export default function HeaderBar() {
     return (
         <div className="flex gap-4 mb-6">
@@ -20,8 +23,13 @@ export default function HeaderBar() {
                     <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="rating">Sort by Rating</SelectItem>
-                    <SelectItem value="distance">Sort by Distance</SelectItem>
+                    {categories.map((category) => {
+                        return (
+                            <SelectItem value={category.name}>
+                                {category.name}
+                            </SelectItem>
+                        );
+                    })}
                 </SelectContent>
             </Select> */}
         </div>

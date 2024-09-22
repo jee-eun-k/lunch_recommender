@@ -11,7 +11,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+
 import HeaderBar from '@/components/header/headerBar';
+import RestaurantAddForm from './restaurant/restaurant-add-form';
 
 // Mock data for restaurants
 const restaurants = [
@@ -84,7 +86,6 @@ export default function HomePage() {
                     </SelectContent>
                 </Select>
             </div> */}
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredRestaurants.map((restaurant) => (
                     <Link
@@ -109,12 +110,7 @@ export default function HomePage() {
                     </Link>
                 ))}
             </div>
-
-            {/* <Link href="/"> */}
-            <Button className="fixed bottom-6 right-6 rounded-full w-12 h-12 p-0">
-                <Plus className="w-6 h-6" />
-            </Button>
-            {/* </Link> */}
+            <RestaurantAddForm />
         </div>
     );
 }
