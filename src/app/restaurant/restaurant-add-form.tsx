@@ -20,6 +20,8 @@ import {
 import { getCategories } from '@/actions/categories';
 import { fetchCategoriesData } from '@/db/queries/categories';
 import type { Category } from '@prisma/client';
+import { useFormState } from 'react-dom';
+import * as actions from '@/actions';
 
 export default function RestaurantAddForm() {
     const [newRating, setNewRating] = useState(5);
@@ -31,7 +33,9 @@ export default function RestaurantAddForm() {
         };
         getCategoryData();
     }, []);
-
+    const [formState, action] = useFormState(actions.createRestaurant, {
+        errors: {},
+    });
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -43,13 +47,14 @@ export default function RestaurantAddForm() {
                 className="w-80"
                 style={{ backgroundColor: 'white' }}
             >
-                <form>
+                <form action={action}>
                     <div className="grid gap-4">
                         <div className="grid gap-2">
                             <div className="grid grid-cols-3 items-center gap-4">
                                 <Label htmlFor="name">NAME</Label>
                                 <Input
                                     id="name"
+                                    name="name"
                                     // defaultValue=""
                                     className="col-span-2 h-8"
                                 />
@@ -96,6 +101,7 @@ export default function RestaurantAddForm() {
                                 <Label htmlFor="location">LOCATION</Label>
                                 <Input
                                     id="location"
+                                    name="location"
                                     defaultValue=""
                                     className="col-span-2 h-8"
                                 />
@@ -104,6 +110,7 @@ export default function RestaurantAddForm() {
                                 <Label htmlFor="description">DESCRIPTION</Label>
                                 <Input
                                     id="description"
+                                    name="description"
                                     defaultValue=""
                                     className="col-span-2 h-8"
                                 />
