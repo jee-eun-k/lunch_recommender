@@ -39,72 +39,79 @@ export default function RestaurantAddForm() {
                     +
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-80">
-                <div className="grid gap-4">
-                    <div className="grid gap-2">
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="name">NAME</Label>
-                            <Input
-                                id="name"
-                                // defaultValue=""
-                                className="col-span-2 h-8"
-                            />
-                        </div>
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="cateory">CATEGORY</Label>
-                            <Select defaultValue="korean">
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue placeholder="Sort by" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    {categories?.map((category) => {
-                                        return (
-                                            <SelectItem
-                                                key={category.id}
-                                                value={category.name}
-                                            >
-                                                {category.name}
-                                            </SelectItem>
-                                        );
-                                    })}
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="height">RATING</Label>
-                            <div className="flex flex-grow-1">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star
-                                        key={i}
-                                        className={`w-6 h-6 m-0 p-0 cursor-pointer ${
-                                            i < newRating
-                                                ? 'text-yellow-400'
-                                                : 'text-gray-300'
-                                        }`}
-                                        onClick={() => setNewRating(i + 1)}
-                                    />
-                                ))}
+            <PopoverContent
+                className="w-80"
+                style={{ backgroundColor: 'white' }}
+            >
+                <form>
+                    <div className="grid gap-4">
+                        <div className="grid gap-2">
+                            <div className="grid grid-cols-3 items-center gap-4">
+                                <Label htmlFor="name">NAME</Label>
+                                <Input
+                                    id="name"
+                                    // defaultValue=""
+                                    className="col-span-2 h-8"
+                                />
+                            </div>
+                            <div className="grid grid-cols-3 items-center gap-4">
+                                <Label htmlFor="cateory">CATEGORY</Label>
+                                <Select defaultValue="Korean">
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue placeholder="Sort by" />
+                                    </SelectTrigger>
+                                    <SelectContent
+                                        style={{ backgroundColor: 'white' }}
+                                    >
+                                        {categories?.map((category) => {
+                                            return (
+                                                <SelectItem
+                                                    key={category.id}
+                                                    value={category.name}
+                                                >
+                                                    {category.name}
+                                                </SelectItem>
+                                            );
+                                        })}
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                            <div className="grid grid-cols-3 items-center gap-4">
+                                <Label htmlFor="height">RATING</Label>
+                                <div className="flex flex-grow-1">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star
+                                            key={i}
+                                            className={`w-6 h-6 m-0 p-0 cursor-pointer ${
+                                                i < newRating
+                                                    ? 'text-yellow-400'
+                                                    : 'text-gray-300'
+                                            }`}
+                                            onClick={() => setNewRating(i + 1)}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-3 items-center gap-4">
+                                <Label htmlFor="location">LOCATION</Label>
+                                <Input
+                                    id="location"
+                                    defaultValue=""
+                                    className="col-span-2 h-8"
+                                />
+                            </div>
+                            <div className="grid grid-cols-3 items-center gap-4">
+                                <Label htmlFor="description">DESCRIPTION</Label>
+                                <Input
+                                    id="description"
+                                    defaultValue=""
+                                    className="col-span-2 h-8"
+                                />
                             </div>
                         </div>
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="location">LOCATION</Label>
-                            <Input
-                                id="location"
-                                defaultValue=""
-                                className="col-span-2 h-8"
-                            />
-                        </div>
-                        <div className="grid grid-cols-3 items-center gap-4">
-                            <Label htmlFor="description">DESCRIPTION</Label>
-                            <Input
-                                id="description"
-                                defaultValue=""
-                                className="col-span-2 h-8"
-                            />
-                        </div>
+                        <Button type="submit">SAVE!</Button>
                     </div>
-                    <Button className="">SAVE!</Button>
-                </div>
+                </form>
             </PopoverContent>
         </Popover>
     );
