@@ -89,7 +89,7 @@ export default function RestaurantAddForm() {
                                     name="rating"
                                     className="hidden"
                                     value={newRating}
-                                ></input>
+                                />
                                 <div className="flex flex-grow-1 ">
                                     {[...Array(5)].map((_, i) => (
                                         <Star

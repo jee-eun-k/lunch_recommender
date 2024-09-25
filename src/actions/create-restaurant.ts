@@ -1,6 +1,7 @@
 'use server';
 
-import { error } from 'console';
+import { db } from '@/db';
+import type { Restaurant } from '@prisma/client';
 import { z } from 'zod';
 const createRestaurantSchema = z.object({
     name: z.string().min(2),
@@ -18,4 +19,16 @@ export async function createRestaurant(
             error: result.error.flatten().fieldErrors,
         };
     }
+
+    let restaurant: Restaurant;
+
+    try {
+        restaurant = await db.restaurant.create({
+            data: {
+                name: result.data.name,
+                categoryId: result.data.category,
+                rating: result.data.rating,
+            },
+        });
+    } catch (err) {}
 }
