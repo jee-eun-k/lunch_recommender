@@ -55,13 +55,12 @@ export default function RestaurantAddForm() {
                                 <Input
                                     id="name"
                                     name="name"
-                                    // defaultValue=""
                                     className="col-span-2 h-8"
                                 />
                             </div>
                             <div className="grid grid-cols-3 items-center gap-4">
-                                <Label htmlFor="cateory">CATEGORY</Label>
-                                <Select defaultValue="Korean">
+                                <Label htmlFor="category">CATEGORY</Label>
+                                <Select name="category" defaultValue="Korean">
                                     <SelectTrigger className="w-[180px]">
                                         <SelectValue placeholder="Sort by" />
                                     </SelectTrigger>
@@ -81,9 +80,17 @@ export default function RestaurantAddForm() {
                                     </SelectContent>
                                 </Select>
                             </div>
-                            <div className="grid grid-cols-3 items-center gap-4">
-                                <Label htmlFor="height">RATING</Label>
-                                <div className="flex flex-grow-1">
+                            <div
+                                id="rating"
+                                className="grid grid-cols-3 items-center gap-4"
+                            >
+                                <Label htmlFor="rating">RATING</Label>
+                                <input
+                                    name="rating"
+                                    className="hidden"
+                                    value={newRating}
+                                ></input>
+                                <div className="flex flex-grow-1 ">
                                     {[...Array(5)].map((_, i) => (
                                         <Star
                                             key={i}
