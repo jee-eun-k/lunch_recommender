@@ -60,7 +60,7 @@ export default function RestaurantAddForm() {
                             </div>
                             <div className="grid grid-cols-3 items-center gap-4">
                                 <Label htmlFor="category">CATEGORY</Label>
-                                <Select name="category" defaultValue="Korean">
+                                <Select name="category" defaultValue="2">
                                     <SelectTrigger className="w-[180px]">
                                         <SelectValue placeholder="Sort by" />
                                     </SelectTrigger>
@@ -71,7 +71,7 @@ export default function RestaurantAddForm() {
                                             return (
                                                 <SelectItem
                                                     key={category.id}
-                                                    value={category.name}
+                                                    value={category.id.toString()}
                                                 >
                                                     {category.name}
                                                 </SelectItem>
