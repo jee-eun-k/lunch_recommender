@@ -3,12 +3,13 @@ import { db } from '@/db';
 
 export type RestaurantWithCategory = Restaurant & { category: Category };
 
-export function fetchTopRestaurants(): Promise<any[]> {
+export function fetchTopRestaurants(): Promise<RestaurantWithCategory[]> {
     return db.restaurant.findMany({
         // relationLoadStrategy: 'join', // or 'query'
-        // include: {
-        //     category: true, // Ensuring we fetch the related category
-        // },
+        include: {
+            category: true,
+        },
+
         orderBy: [
             {
                 rating: 'desc',

@@ -1,40 +1,14 @@
+import { RestaurantWithCategory } from '@/db/queries/restaurants';
 import { Restaurant } from '@prisma/client';
 import { MapPin, Star } from 'lucide-react';
 import Link from 'next/link';
 
-interface ListProps {}
-
-// Mock data for restaurants
-const restaurants = [
-    {
-        id: 1,
-        name: 'Tasty Bites',
-        category: 'Italian',
-        rating: 4.5,
-        distance: 0.5,
-    },
-    {
-        id: 2,
-        name: 'Sushi Haven',
-        category: 'Japanese',
-        rating: 4.8,
-        distance: 0.7,
-    },
-    {
-        id: 3,
-        name: 'Burger Joint',
-        category: 'American',
-        rating: 4.2,
-        distance: 0.3,
-    },
-];
 export default async function List({
     fetchData,
 }: {
-    fetchData: () => Restaurant[];
+    fetchData: () => RestaurantWithCategory[];
 }) {
     const fetchedData = await fetchData();
-
     return (
         <>
             {fetchedData.map((restaurant) => (
@@ -46,7 +20,9 @@ export default async function List({
                     <h2 className="text-xl font-semibold mb-2">
                         {restaurant.name}
                     </h2>
-                    <p className="text-gray-600 mb-2">{restaurant.category}</p>
+                    <p className="text-gray-600 mb-2">
+                        {restaurant.category.name}
+                    </p>
                     <div className="flex items-center gap-2 mb-2">
                         <Star className="text-yellow-400" />
                         <span>{restaurant.rating}</span>
