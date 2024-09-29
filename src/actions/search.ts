@@ -3,9 +3,9 @@
 import { redirect } from 'next/navigation';
 
 export async function search(formData: FormData) {
-    const term = formData.get('term');
-    if (typeof term !== 'string' || !term) {
+    const name = formData.get('name');
+    if (typeof name !== 'string' || !name) {
         redirect('/');
     }
-    redirect(`/search?term=${term}`);
+    redirect(`/restaurant?name=${name}`);
 }

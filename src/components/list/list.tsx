@@ -1,12 +1,11 @@
 import { RestaurantWithCategory } from '@/db/queries/restaurants';
-import { Restaurant } from '@prisma/client';
 import { MapPin, Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function List({
     fetchData,
 }: {
-    fetchData: () => RestaurantWithCategory[];
+    fetchData: () => Promise<RestaurantWithCategory[]>;
 }) {
     const fetchedData = await fetchData();
     return (

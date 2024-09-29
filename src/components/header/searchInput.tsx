@@ -6,17 +6,15 @@ import * as actions from '@/actions';
 
 export default function SearchInput() {
     const searchParams = useSearchParams();
+    console.log(searchParams);
     return (
-        <>
-            <form action={actions.search}>
-                <Input
-                    type="text"
-                    placeholder="Search by name or category"
-                    defaultValue={searchParams.get('term') || ''}
-                    // onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                />
-            </form>
-        </>
+        <form action={actions.search}>
+            <Input
+                name="name"
+                placeholder="Search by name"
+                defaultValue={searchParams.get('name') || ''}
+                className="pl-10"
+            />
+        </form>
     );
 }

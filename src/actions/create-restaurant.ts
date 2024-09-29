@@ -6,7 +6,6 @@ import { z } from 'zod';
 const createRestaurantSchema = z.object({
     name: z.string().min(2),
     categoryId: z.number().int(),
-    rating: z.number().int(),
     description: z.string().nullable(),
     location: z.string().nullable(),
 });
@@ -16,14 +15,12 @@ export async function createRestaurant(
 ): Promise<any> {
     const name = formData.get('name');
     const categoryId = parseInt(formData.get('category') as string);
-    const rating = parseInt(formData.get('rating') as string);
     const description = formData.get('description');
     const location = formData.get('location');
 
     const result = createRestaurantSchema.safeParse({
         name,
         categoryId,
-        rating,
         description,
         location,
     });
@@ -42,7 +39,7 @@ export async function createRestaurant(
             data: {
                 name: result.data.name,
                 categoryId: result.data.categoryId,
-                rating: result.data.rating,
+                rating: 0,
                 description: result.data.description,
                 location: result.data.location,
             },

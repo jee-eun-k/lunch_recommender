@@ -8,8 +8,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Star } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Select,
     SelectContent,
@@ -18,13 +17,11 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { getCategories } from '@/actions/categories';
-import { fetchCategoriesData } from '@/db/queries/categories';
 import type { Category } from '@prisma/client';
 import { useFormState } from 'react-dom';
 import * as actions from '@/actions';
 
 export default function RestaurantAddForm() {
-    const [newRating, setNewRating] = useState(5);
     const [categories, setCategories] = useState<Category[]>([]);
     useEffect(() => {
         const getCategoryData = async () => {
@@ -36,9 +33,10 @@ export default function RestaurantAddForm() {
     const [formState, action] = useFormState(actions.createRestaurant, {
         errors: {},
     });
+    const [open, setOpen] = useState(false);
     return (
-        <Popover>
-            <PopoverTrigger asChild>
+        <Popover open={open}>
+            <PopoverTrigger onClick={() => setOpen(!open)} asChild>
                 <Button className="fixed bottom-6 right-6 rounded-full w-12 h-12 p-0">
                     +
                 </Button>
@@ -46,6 +44,7 @@ export default function RestaurantAddForm() {
             <PopoverContent
                 className="w-80"
                 style={{ backgroundColor: 'white' }}
+                onPointerDownOutside={() => setOpen(!open)}
             >
                 <form action={action}>
                     <div className="grid gap-4">
@@ -79,30 +78,6 @@ export default function RestaurantAddForm() {
                                         })}
                                     </SelectContent>
                                 </Select>
-                            </div>
-                            <div
-                                id="rating"
-                                className="grid grid-cols-3 items-center gap-4"
-                            >
-                                <Label htmlFor="rating">RATING</Label>
-                                <input
-                                    name="rating"
-                                    className="hidden"
-                                    value={newRating}
-                                />
-                                <div className="flex flex-grow-1 ">
-                                    {[...Array(5)].map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            className={`w-6 h-6 m-0 p-0 cursor-pointer ${
-                                                i < newRating
-                                                    ? 'text-yellow-400'
-                                                    : 'text-gray-300'
-                                            }`}
-                                            onClick={() => setNewRating(i + 1)}
-                                        />
-                                    ))}
-                                </div>
                             </div>
                             <div className="grid grid-cols-3 items-center gap-4">
                                 <Label htmlFor="location">LOCATION</Label>
