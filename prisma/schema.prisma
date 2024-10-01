@@ -1,6 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// npx prisma migrate dev --name init
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,7 +15,8 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
-  // posts Post[]
+  comment Comment[]
+
 }
 
 model Category {
@@ -31,4 +33,15 @@ model Restaurant {
   categoryId Int
   rating  Int
   category    Category     @relation(fields: [categoryId], references: [id])
+  Comment Comment[]
+}
+
+model Comment {
+  id        Int     @id @default(autoincrement())
+  restaurantId        Int
+  userId        Int
+  rating  Int
+  comment String?
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
 }
