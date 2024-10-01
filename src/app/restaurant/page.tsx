@@ -9,12 +9,11 @@ interface ShowPageProps {
 }
 export default function Page({ searchParams }: ShowPageProps) {
     const { name } = searchParams;
-    console.log(searchParams);
-
+    const decodedName = decodeURIComponent(name);
     return (
         <div className="container mx-auto p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <List fetchData={() => fetchRestaurants(name)} />
+                <List fetchData={() => fetchRestaurants(decodedName)} />
             </div>
             <RestaurantAddForm />
         </div>
