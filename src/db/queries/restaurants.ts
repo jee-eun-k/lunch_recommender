@@ -1,7 +1,11 @@
-import type { Restaurant, Category } from '@prisma/client';
+import type { Restaurant, Category, Comment } from '@prisma/client';
 import { db } from '@/db';
 
 export type RestaurantWithCategory = Restaurant & { category: Category };
+export type RestaurantWithCategoryAndComments = Restaurant & {
+    category: Category;
+    comments: Comment[];
+};
 
 export function fetchTopRestaurants(): Promise<RestaurantWithCategory[]> {
     const result = db.restaurant.findMany({
@@ -17,6 +21,7 @@ export function fetchTopRestaurants(): Promise<RestaurantWithCategory[]> {
     });
     return result;
 }
+
 export function fetchRestaurants(
     keyword: string
 ): Promise<RestaurantWithCategory[]> {
@@ -34,6 +39,21 @@ export function fetchRestaurants(
                 rating: 'desc',
             },
         ],
+    });
+    return result;
+}
+
+export function fetchRestaurant(
+    id: number
+): Promise<RestaurantWithCategoryAndComments> {
+    const result = db.restaurant.findFirst({
+        include: {
+            category: true,
+            comment: true,
+        },
+        where: {
+            id,
+        },
     });
     return result;
 }

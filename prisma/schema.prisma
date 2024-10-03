@@ -11,13 +11,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  comment Comment[]
-
-}
+// model User {
+//   id    Int     @id @default(autoincrement())
+//   email String  @unique
+//   name  String?
+//   comment Comment[]
+// }
 
 model Category {
   id        Int     @id @default(autoincrement())
@@ -33,15 +32,15 @@ model Restaurant {
   categoryId Int
   rating  Int
   category    Category     @relation(fields: [categoryId], references: [id])
-  Comment Comment[]
+  comment Comment[]
 }
 
 model Comment {
   id        Int     @id @default(autoincrement())
   restaurantId        Int
-  userId        Int
+  userName        String
   rating  Int
   comment String?
   restaurant   Restaurant   @relation(fields: [restaurantId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
+  // user   User   @relation(fields: [userId], references: [id])
 }
