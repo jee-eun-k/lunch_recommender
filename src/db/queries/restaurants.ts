@@ -43,9 +43,7 @@ export function fetchRestaurants(
     return result;
 }
 
-export function fetchRestaurant(
-    id: number
-): Promise<RestaurantWithCategoryAndComments> {
+export function fetchRestaurant(id: number): Promise<any> {
     const result = db.restaurant.findFirst({
         include: {
             category: true,

@@ -88,16 +88,22 @@ export default async function RestaurantDetails() {
                                     ))}
                                 </div>
                             </div>
-                            <p>{c.content}</p>
+                            <p>{c.text}</p>
                         </div>
                     ))}
             </div>
 
             <form className="space-y-4">
                 <h3 className="text-xl font-semibold">Add a comment</h3>
+                <Input
+                    name="restaurantId"
+                    className="hidden"
+                    value={restaurant.id}
+                    readOnly
+                />
                 <Input name="username" />
                 <Textarea
-                    name="comment"
+                    name="text"
                     placeholder="Write your comment here..."
                     className="w-full"
                 />

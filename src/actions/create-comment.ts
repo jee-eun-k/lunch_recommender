@@ -1,28 +1,28 @@
 'use server';
 
 import { db } from '@/db';
-import type { Restaurant } from '@prisma/client';
+import type { Comment } from '@prisma/client';
 import { z } from 'zod';
 const createCommentSchema = z.object({
-    name: z.string().min(2),
-    categoryId: z.number().int(),
-    description: z.string().nullable(),
-    location: z.string().nullable(),
+    restaurantId: z.number().int(),
+    userName: z.string().min(2),
+    rating: z.number().int(),
+    text: z.string().nullable(),
 });
 export async function createComment(
     formState: any,
     formData: FormData
 ): Promise<any> {
-    const name = formData.get('name');
-    const categoryId = parseInt(formData.get('category') as string);
-    const description = formData.get('description');
-    const location = formData.get('location');
+    const restaurantId = parseInt(formData.get('restaurantId') as string);
+    const userName = formData.get('userName');
+    const rating = parseInt(formData.get('rating') as string);
+    const text = formData.get('text');
 
     const result = createCommentSchema.safeParse({
-        name,
-        categoryId,
-        description,
-        location,
+        restaurantId,
+        userName,
+        rating,
+        text,
     });
     if (!result.success) {
         console.error(result.error.flatten());
@@ -32,19 +32,17 @@ export async function createComment(
         };
     }
 
-    let restaurant: Restaurant;
+    let comment: Comment;
 
     try {
-        restaurant = await db.restaurant.create({
+        comment = await db.comment.create({
             data: {
-                name: result.data.name,
-                categoryId: result.data.categoryId,
-                rating: 0,
-                description: result.data.description,
-                location: result.data.location,
+                restaurantId: result.data.restaurantId,
+                userName: result.data.userName,
+                rating: result.data.rating,
+                text: result.data.text,
             },
         });
-        console.log(restaurant);
     } catch (err) {
         console.error(err);
     }
