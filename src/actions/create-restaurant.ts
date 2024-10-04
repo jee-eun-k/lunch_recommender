@@ -44,7 +44,6 @@ export async function createRestaurant(
                 location: result.data.location,
             },
         });
-        console.log(restaurant);
     } catch (err) {
         console.error(err);
     }

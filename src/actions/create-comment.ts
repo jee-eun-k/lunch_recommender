@@ -24,6 +24,7 @@ export async function createComment(
         rating,
         text,
     });
+    // console.log('result', result);
     if (!result.success) {
         console.error(result.error.flatten());
 
@@ -31,7 +32,6 @@ export async function createComment(
             error: result.error.flatten().fieldErrors,
         };
     }
-
     let comment: Comment;
 
     try {

@@ -7,7 +7,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { RatingStars } from './rating-starts';
 import * as actions from '@/actions';
 import { Input } from '@/components/ui/input';
-export default async function RestaurantDetails() {
+import { GetServerSideProps, NextPage } from 'next/types';
+
+const getServerSideProps: GetServerSideProps<any> = async () => {
+    return { props: await fetchRestaurant(1) };
+};
+
+export default function RestaurantDetails(props: any) {
+    console.log(getServerSideProps());
     // Mock data for a restaurant
     // const restaurant = {
     //     id: 1,
@@ -29,8 +36,19 @@ export default async function RestaurantDetails() {
     // const [newComment, setNewComment] = useState('');
     // const [newRating, setNewRating] = useState(5);
 
-    const restaurant = await fetchRestaurant(1);
-    console.log(restaurant);
+    // const [restaurant, setRestaurant] = useState({
+    //     id: null,
+    //     category: {
+    //         name: null,
+    //     },
+    // });
+    // useEffect(() => {
+    //     async function getRestaurantData() {
+    //         const restaurantData = await fetchRestaurant(1);
+    //         setRestaurant(restaurantData);
+    //     }
+    //     getRestaurantData();
+    // }, []);
 
     const handleSubmitComment = (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,26 +66,26 @@ export default async function RestaurantDetails() {
                 </Button>
             </Link>
 
-            <h1 className="text-3xl font-bold mb-4">{restaurant.name}</h1>
-            <p className="text-gray-600 mb-2">{restaurant.category.name}</p>
+            {/* <h1 className="text-3xl font-bold mb-4">{restaurant!.name}</h1> */}
+            {/* <p className="text-gray-600 mb-2">{restaurant.category.name}</p> */}
 
             <div className="flex items-center gap-4 mb-4">
                 <div className="flex items-center">
                     <Star className="text-yellow-400 mr-1" />
-                    <span>{restaurant.rating}</span>
+                    {/* <span>{restaurant.rating}</span> */}
                 </div>
                 <div className="flex items-center">
                     <MapPin size={16} className="mr-1" />
-                    <span>{restaurant.location} km</span>
+                    {/* <span>{restaurant.location} km</span> */}
                 </div>
             </div>
 
-            <p className="mb-6">{restaurant.description}</p>
+            {/* <p className="mb-6">{restaurant.description}</p> */}
 
             <h2 className="text-2xl font-semibold mb-4">Comments</h2>
 
             <div className="space-y-4 mb-6">
-                {restaurant.comments &&
+                {/* {restaurant.comments &&
                     restaurant.comments.map((c: any) => (
                         <div key={c.id} className="border-b pb-4">
                             <div className="flex items-center gap-2 mb-2">
@@ -90,7 +108,7 @@ export default async function RestaurantDetails() {
                             </div>
                             <p>{c.text}</p>
                         </div>
-                    ))}
+                    ))} */}
             </div>
 
             <form className="space-y-4">
@@ -98,7 +116,7 @@ export default async function RestaurantDetails() {
                 <Input
                     name="restaurantId"
                     className="hidden"
-                    value={restaurant.id}
+                    // value={restaurant.id}
                     readOnly
                 />
                 <Input name="username" />

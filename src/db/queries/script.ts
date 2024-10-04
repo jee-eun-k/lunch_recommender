@@ -11,8 +11,13 @@ async function main() {
     //     },
     // });
     // console.log(category);
-    const restaurant = await prisma.restaurant.findMany();
-    console.log(restaurant);
+
+    // const restaurant = await prisma.restaurant.findMany();
+    // console.log(restaurant);
+
+    const comment = await prisma.comment.findMany();
+    // console.log(comment);
+
     // const deleteCategory = await prisma.category.delete({
     //     where: {
     //         id: 1,
