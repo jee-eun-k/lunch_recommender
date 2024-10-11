@@ -7,14 +7,22 @@ import { Textarea } from '@/components/ui/textarea';
 import { RatingStars } from './rating-starts';
 import * as actions from '@/actions';
 import { Input } from '@/components/ui/input';
-import { GetServerSideProps, NextPage } from 'next/types';
+import {
+    GetServerSideProps,
+    InferGetServerSidePropsType,
+    NextPage,
+} from 'next/types';
+import { any } from 'zod';
 
-const getServerSideProps: GetServerSideProps<any> = async () => {
-    return { props: await fetchRestaurant(1) };
-};
+// export const getServerSideProps: GetServerSideProps<any> = async () => {
+//     const d = await fetchRestaurant(1);
+//     console.log(d);
+//     return { props: d };
+// };
 
-export default function RestaurantDetails(props: any) {
-    console.log(getServerSideProps());
+export default function RestaurantDetails({
+    props,
+}: InferGetServerSidePropsType<typeof any>) {
     // Mock data for a restaurant
     // const restaurant = {
     //     id: 1,
